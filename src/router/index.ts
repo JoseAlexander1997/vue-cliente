@@ -17,9 +17,25 @@ const router = createRouter({
 
 router.beforeEach((to) => {
   const token = localStorage.getItem('token')
-  if (to.meta.requiresAuth && !token) return { name: 'login', query: { redirect: to.fullPath } }
-  if (to.name === 'login' && token) return { name: 'usuarios' }
+  const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')!) : null
+
+  // Requiere login
+  if (to.meta.requiresAuth && !token) {
+    return { name: 'login', query: { redirect: to.fullPath } }
+  }
+
+  // Requiere admin
+  if (to.meta.requiresAdmin && user?.rol !== 'admin') {
+    return { name: 'usuarios' } // redirige al listado
+  }
+
+  // Si ya está logueado y va al login, redirige al listado
+  if (to.name === 'login' && token) {
+    return { name: 'usuarios' }
+  }
+
   return true
 })
+
 
 export default router

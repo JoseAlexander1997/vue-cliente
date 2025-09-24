@@ -5,6 +5,12 @@
     :loading="loading"
     class="elevation-1"
   >
+    <template #item.actions="{ item }">
+      <v-btn color="primary" small @click="editUser(item.id)">
+        Editar
+      </v-btn>
+    </template>
+
     <template #no-data>
       <div class="pa-6 text-center">No hay usuarios para mostrar.</div>
     </template>
@@ -13,11 +19,12 @@
 
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
+import { useRouter } from 'vue-router'
 import api from '@/services/api'
 
 type Usuario = { id:number; nombre:string; email:string; rol:'admin'|'usuario' }
-
 const props = defineProps<{ searchTerm?: string }>()
+const router = useRouter()
 
 const items = ref<Usuario[]>([])
 const loading = ref(false)
@@ -26,9 +33,9 @@ const headers = [
   { title: 'Nombre', value: 'nombre' },
   { title: 'Email',  value: 'email' },
   { title: 'Rol',    value: 'rol' },
+  { title: 'Acciones', value: 'actions' } // nueva columna para acciones
 ]
 
-// carga desde la API
 const fetchUsers = async () => {
   loading.value = true
   try {
@@ -51,6 +58,7 @@ const filtered = computed(() => {
   )
 })
 
-// recargar si quieres al cambiar término (opcional)
-/* watch(() => props.searchTerm, () => { ... }) */
+const editUser = (id: number) => {
+  router.push(`/usuarios/${id}/editar`)
+}
 </script>
