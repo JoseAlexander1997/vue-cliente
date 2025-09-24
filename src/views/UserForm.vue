@@ -13,7 +13,9 @@
           required
         ></v-select>
 
-        <v-btn color="primary" @click="submit">Guardar</v-btn>
+        <v-btn color="primary" @click="saveUser">
+          Guardar
+        </v-btn>
       </v-form>
     </v-card>
   </v-container>
@@ -32,7 +34,7 @@ const router = useRouter()
 const form = ref<Usuario>({ nombre: '', email: '', rol: 'usuario' })
 const isEdit = ref(false)
 
-// Función para cargar usuario
+// Función para cargar usuario desde API
 const loadUser = async (id: string | number) => {
   try {
     const { data } = await api.get<Usuario>(`/usuarios/getUser/${id}`)
@@ -46,7 +48,7 @@ const loadUser = async (id: string | number) => {
 const idParam = route.params.id
 if (idParam) {
   isEdit.value = true
-  loadUser(Number(idParam)) // convertir a número
+  loadUser(Number(idParam))
 }
 
 // Observar cambios de la ruta
@@ -60,17 +62,19 @@ watch(() => route.params.id, (newId) => {
   }
 })
 
-// Guardar usuario
-const submit = async () => {
+// Guardar usuario (crear o actualizar)
+const saveUser = async () => {
   try {
     if (isEdit.value && route.params.id) {
       await api.put(`/usuarios/updateUser/${route.params.id}`, form.value)
+      alert('Usuario actualizado correctamente')
     } else {
       await api.post('/usuarios/addUser', form.value)
+      alert('Usuario creado correctamente')
     }
     router.push('/usuarios')
-  } catch (error) {
-    console.error('Error al guardar', error)
+  } catch (error: any) {
+    alert(error.response?.data?.message || 'Error al guardar usuario')
   }
 }
 </script>
