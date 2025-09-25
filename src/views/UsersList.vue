@@ -5,6 +5,12 @@
     :loading="loading"
     class="elevation-1"
   >
+    <!-- Columna formateada solo con fecha -->
+    <template #item.created_at="{ item }">
+      {{ new Date(item.created_at).toLocaleDateString('es-ES') }}
+    </template>
+
+    <!-- Botón acciones -->
     <template #item.actions="{ item }">
       <v-btn color="primary" small @click="editUser(item.id)">
         Editar
@@ -33,6 +39,7 @@ const headers = [
   { title: 'Nombre', value: 'nombre' },
   { title: 'Email',  value: 'email' },
   { title: 'Rol',    value: 'rol' },
+  { title: 'Creación',    value: 'created_at' },
   { title: 'Acciones', value: 'actions' } // nueva columna para acciones
 ]
 

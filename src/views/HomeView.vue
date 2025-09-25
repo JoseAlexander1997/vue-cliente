@@ -2,40 +2,40 @@
   <v-container fluid>
     <v-row>
       <!-- Sidebar -->
-      <v-col cols="12" md="3">
-        <v-card class="pa-4">
-          <div class="text-subtitle-1 mb-2">Acciones</div>
+        <v-col cols="12" md="3">
+          <v-card class="pa-4">
+            <div class="text-subtitle-1 mb-2">Acciones</div>
 
-          <!-- Agregar usuario: habilitado solo si es admin -->
-          <v-btn
-            block color="primary" class="mb-3"
-            :disabled="!isAdmin"
-            @click="goAddUser"
-          >
-            Agregar usuario
-          </v-btn>
+            <!-- Agregar usuario: habilitado solo si es admin -->
+            <v-btn
+              block color="primary" class="mb-3"
+              :disabled="!isAdmin"
+              @click="goAddUser"
+            >
+              Agregar usuario
+            </v-btn>
 
-          <!-- Buscar (filtra en UsersList) -->
-          <v-text-field
-            v-model="search"
-            label="Buscar usuarios"
-            prepend-inner-icon="mdi-magnify"
-            density="comfortable"
-            clearable
-            class="mb-4"
-          />
+            <!-- Buscar (filtra en UsersList) -->
+            <v-text-field
+              v-model="search"
+              label="Buscar usuarios"
+              prepend-inner-icon="mdi-magnify"
+              density="comfortable"
+              clearable
+              class="mb-4"
+            />
 
-          <v-btn block color="error" variant="tonal" @click="logout">
-            Cerrar sesión
-          </v-btn>
+            <v-btn block color="error" variant="tonal" @click="logout">
+              Cerrar sesión
+            </v-btn>
 
-          <v-divider class="my-4" />
+            <v-divider class="my-4" />
 
-          <div class="text-caption">
-            Sesión: <strong>{{ user?.nombre }}</strong> ({{ user?.rol }})
-          </div>
-        </v-card>
-      </v-col>
+            <div class="text-caption">
+              Sesión: <strong>{{ user?.nombre }}</strong> ({{ user?.rol }})
+            </div>
+          </v-card>
+        </v-col>
 
       <!-- Contenido principal -->
       <v-col cols="12" md="9">
