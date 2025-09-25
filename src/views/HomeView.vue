@@ -1,5 +1,15 @@
 <template>
   <v-container fluid>
+           <v-btn
+  x-small
+  color="secondary"
+  class="mb-3"
+  :disabled="!isAdmin"
+  @click="goTareas">
+ 📝 Tareas
+</v-btn>
+
+
     <v-row>
       <!-- Sidebar -->
         <v-col cols="12" md="3">
@@ -68,6 +78,9 @@ onMounted(() => {
 const isAdmin = computed(() => user.value?.rol === 'admin')
 
 const goAddUser = () => router.push('/usuarios/nuevo')
+
+const goTareas = () => router.push('/tareas')
+
 
 const logout = () => {
   localStorage.removeItem('token')

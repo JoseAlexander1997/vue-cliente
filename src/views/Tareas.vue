@@ -4,9 +4,17 @@
       <div class="d-flex justify-space-between align-center mb-4">
         <div class="text-h6">Listado de Tareas</div>
         <v-btn color="primary" @click="goToNew">Nueva Tarea</v-btn>
-      </div>
-      <v-btn color="success" class="ma-0 pa-1 text-body-2" @click="downloadExcel">
-  DESCARGAR FORMULARIO
+        </div>
+        <v-btn color="success" class="ma-0 pa-1 text-body-2" @click="downloadExcel">
+    DESCARGAR FORMULARIO
+    </v-btn>
+ 
+<v-btn
+  x-small
+  color="secondary"
+  class="mb-3"
+  @click="goToUsuarios">
+ 🧑 Usuarios
 </v-btn>
 
       <v-data-table
@@ -97,6 +105,9 @@ onMounted(() => {
 
 // Navegar a crear
 const goToNew = () => router.push('/tareas/nueva')
+
+// Navegar a usuarios
+const goToUsuarios = () => router.push('/usuarios')
 
 // Navegar a editar
 const editTarea = (id: number) => router.push(`/tareas/${id}/editar`)
