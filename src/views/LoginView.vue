@@ -3,7 +3,7 @@
         <v-card class="w-full max-w-md p-6 rounded-2xl">
             <div class="text-center mb-4">
                 <h2 class="text-xl font-semibold">Iniciar sesión</h2>
-                <p class="text-sm text-gray-500">UMG 2025</p>
+                <p class="text-sm text-gray-500">Jose Alexander Hernandez - UMG 2025</p>
             </div>
 
             <v-form v-model="valid" @submit.prevent="onSubmit">
